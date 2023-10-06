@@ -1,0 +1,131 @@
+﻿@model IEnumerable<ProExam.Models.Student>
+
+@{
+    ViewBag.Title = "StudentManage";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .dashboard-caption {
+        margin: 30px 0;
+        text-align: center;
+        font-size: 40px;
+        font-weight: bold;
+    }
+
+    .btn-add {
+        display: flex;
+        justify-content: end;
+    }
+
+    .container-table {
+        padding: 0 120px;
+        text-align: center
+    }
+
+    table {
+        width: 1372px;
+        background-color: white;
+        margin: auto;
+        border-collapse: collapse;
+    }
+
+    table, th, td {
+        border: none;
+        border-bottom: 2px solid #d5d5d5;
+    }
+
+    th, td {
+        padding: 10px 20px;
+        font-size: 22px;
+        overflow: hidden;
+    }
+
+    .crud-btn {
+        display: inline-block;
+        width: 40px;
+        height: 40px;
+        border-radius: 100%;
+    }
+
+        .crud-btn i {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+        }
+
+    .crud-btn_create {
+        border-radius: 12px;
+        margin-bottom: 20px;
+        padding: 10px;
+    }
+</style>
+
+<h1 class="dashboard-caption">Quản lý học sinh </h1>
+
+
+<div class="container-table">
+    <div class="btn-add">
+        @Html.ActionLink("Thêm học sinh mới", "Create", "StudentManage", new { @class = "crud-btn_create btn-success" })
+    </div>
+
+    <table border="1">
+        <thead style="border-bottom: 3px solid #d5d5d5 ">
+            <tr>
+                <th>ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Date of Birth</th>
+                <th>Gender</th>
+                <th>Email</th>
+                <th>Phone Number</th>
+                <th>Address</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FirstName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LastName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DateOfBirth)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Gender)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PhoneNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Address)
+                    </td>
+                    <td class="action-column">
+                        <a href="@Url.Action("Edit","StudentManage", new { id=item.ID })" class="crud-btn btn-info">
+                            <i class="fa-solid fa-pen-to-square">
+                            </i>
+                        </a>
+                        <a href="@Url.Action("Delete","StudentManage", new { id=item.ID })" class="crud-btn btn-danger">
+                            <i class="fa-solid fa-x">
+                            </i>
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
