@@ -14,13 +14,17 @@ namespace ProExam.Models
     
     public partial class Student
     {
-        public int ID { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public Nullable<System.DateTime> DateOfBirth { get; set; }
-        public string Gender { get; set; }
-        public string Email { get; set; }
-        public string PhoneNumber { get; set; }
-        public string Address { get; set; }
+        public string StudentCode { get; set; }
+        public string Stu_FirstName { get; set; }
+        public string Stu_LastName { get; set; }
+        public Nullable<System.DateTime> Stu_DOB { get; set; }
+        public string Stu_Gender { get; set; }
+        public string Stu_Email { get; set; }
+        public string Stu_PhoneNumber { get; set; }
+        public string Stu_Address { get; set; }
+        public string Stu_Password { get; set; }
+        public string Class_ID { get; set; }
+    
+        public virtual Class Class { get; set; }
     }
 }

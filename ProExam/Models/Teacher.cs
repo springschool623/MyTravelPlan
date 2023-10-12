@@ -12,18 +12,25 @@ namespace ProExam.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Class
+    public partial class Teacher
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Class()
+        public Teacher()
         {
-            this.Students = new HashSet<Student>();
+            this.Subjects_Teacher = new HashSet<Subjects_Teacher>();
         }
     
-        public string Class_ID { get; set; }
-        public Nullable<int> Stu_Quantity { get; set; }
+        public string TeacherCode { get; set; }
+        public string Tea_FirstName { get; set; }
+        public string Tea_LastName { get; set; }
+        public Nullable<System.DateTime> Tea_DOB { get; set; }
+        public string Tea_Gender { get; set; }
+        public string Tea_Email { get; set; }
+        public string Tea_PhoneNumber { get; set; }
+        public string Tea_Address { get; set; }
+        public string Tea_Password { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Student> Students { get; set; }
+        public virtual ICollection<Subjects_Teacher> Subjects_Teacher { get; set; }
     }
 }

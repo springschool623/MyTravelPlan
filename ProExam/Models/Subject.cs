@@ -12,18 +12,24 @@ namespace ProExam.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Class
+    public partial class Subject
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Class()
+        public Subject()
         {
-            this.Students = new HashSet<Student>();
+            this.TestSchedules = new HashSet<TestSchedule>();
+            this.Subjects_Teacher = new HashSet<Subjects_Teacher>();
         }
     
-        public string Class_ID { get; set; }
-        public Nullable<int> Stu_Quantity { get; set; }
+        public string Subject_ID { get; set; }
+        public string Subject_Name { get; set; }
+        public Nullable<int> QuestionQuantity { get; set; }
+        public Nullable<int> Testing_Time { get; set; }
+        public string Subject_Description { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Student> Students { get; set; }
+        public virtual ICollection<TestSchedule> TestSchedules { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Subjects_Teacher> Subjects_Teacher { get; set; }
     }
 }

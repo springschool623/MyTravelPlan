@@ -4,13 +4,17 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="cd95007eace4470a873ea55bd140a482" Name="Diagram1">
-        <EntityTypeShape EntityType="ProExamDBModel.Class" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProExamDBModel.LichThi" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProExamDBModel.LoginInfo" Width="1.5" PointX="2.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProExamDBModel.MonHoc" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProExamDBModel.Student" Width="1.5" PointX="4.75" PointY="4.75" IsExpanded="true" />
+      <Diagram DiagramId="3079b7c36efc417fb937af9fb449c36b" Name="Diagram1" ZoomLevel="83">
+        <EntityTypeShape EntityType="ProExamDBModel.Class" Width="1.5" PointX="5.75" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProExamDBModel.Student" Width="1.5" PointX="8" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProExamDBModel.Subject" Width="1.5" PointX="0.75" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProExamDBModel.Subjects_Teacher" Width="1.5" PointX="3" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProExamDBModel.Teacher" Width="1.5" PointX="7.125" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProExamDBModel.TestSchedule" Width="1.5" PointX="1.5" PointY="5.75" IsExpanded="true" />
+        <AssociationConnector Association="ProExamDBModel.FK_ClassID" ManuallyRouted="false" />
         <AssociationConnector Association="ProExamDBModel.fk_MaMonHoc" ManuallyRouted="false" />
+        <AssociationConnector Association="ProExamDBModel.FK_SubjectID" ManuallyRouted="false" />
+        <AssociationConnector Association="ProExamDBModel.FK_SubTeacherCode" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

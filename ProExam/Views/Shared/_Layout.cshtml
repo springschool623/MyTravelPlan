@@ -241,7 +241,7 @@
                     <div class="info">
                         <a href="#" class="d-block">Admin</a>
                     </div>
-                    <a href="@Url.Action("Logout", "Home")" class="btn btn-logout" style="margin-left:auto">
+                    <a href="@Url.Action("Logout", "Login")" class="btn btn-logout" style="margin-left:auto">
                         <i class="fa-solid fa-right-from-bracket" style="color: white;"></i>
                     </a>
                 </div>
@@ -270,16 +270,16 @@
                         <!-- Add icons to the links using the .nav-icon class
     with font-awesome or any other icon font library -->
                         <li class="nav-item">
-                            <a href="@Url.Action("LoginInfo","LoginInfoes")" class="nav-link">
+                            <a href="@Url.Action("Index","Teachers")" class="nav-link">
                                 <i class="nav-icon fas fa-user"></i>
                                 <p>
-                                    Tài khoản
+                                    Giáo viên
                                     <span class="right badge badge-danger">New</span>
                                 </p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="@Url.Action("StudentManage","StudentManage")" class="nav-link">
+                            <a href="@Url.Action("Index","Students")" class="nav-link">
                                 <i class="nav-icon fas fa-users"></i>
                                 <p>
                                     Học sinh
@@ -288,7 +288,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="@Url.Action("Class","Class")" class="nav-link">
+                            <a href="@Url.Action("Index","Classes")" class="nav-link">
                                 <i class="nav-icon fas fa-chair"></i>
                                 <p>
                                     Lớp học
@@ -297,7 +297,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="@Url.Action("Subject","Subject")" class="nav-link">
+                            <a href="@Url.Action("Index","Subjects")" class="nav-link">
                                 <i class="nav-icon fas fa-book"></i>
                                 <p>
                                     Môn thi
@@ -306,7 +306,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="@Url.Action("TestSchedule","TestSchedule")" class="nav-link">
+                            <a href="@Url.Action("Index","TestSchedules")" class="nav-link">
                                 <i class="nav-icon fas fa-calendar"></i>
                                 <p>
                                     Lịch thi

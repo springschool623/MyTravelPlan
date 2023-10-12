@@ -12,7 +12,7 @@ namespace ProExam.Controllers
 {
     public class AdminDashboardController : Controller
     {
-        private ProExamDBEntities5 db = new ProExamDBEntities5();
+        private ProExamDBEntities8 db = new ProExamDBEntities8();
 
         // GET: AdminDashboard
         public ActionResult ADHomePage()

@@ -5,6 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="~/Content/dist/css/style.css" rel="stylesheet" />
     <title>Document</title>
+    <style>
+        .btn-login {
+            color: black;
+            text-decoration: none;
+            background-color: aliceblue;
+            border: 2px solid black;
+            cursor: pointer;
+            padding: 15px;
+            margin: auto 60px;
+            border-radius: 10px;
+            font-size: 20px;
+        }
+    </style>
 </head>
 <body>
 
@@ -27,6 +40,7 @@
                 @if (sessionUserCode.IsEmpty())
                 {
                     <div class="login-section">
+                        <h1>Đăng nhập:</h1>
                         <a class="btn-login stu-login" onclick="hienPopup()">
                             Đăng nhập
                         </a>
@@ -34,11 +48,9 @@
                 }
                 else
                 {
-                    <h1>Out</h1>
-
                     <div class="login-section">
                         <h1>@sessionUserCode</h1>
-                        <a href="@Url.Action("Logout", "Home")" class="btn btn-login stu-login">
+                        <a href="@Url.Action("Logout", "Login")" class="btn-login stu-login">
                             Đăng xuất
                         </a>
                     </div>
