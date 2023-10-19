@@ -13,10 +13,10 @@ namespace ProExam.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class ProExamDBEntities8 : DbContext
+    public partial class ProExamDBEntities9 : DbContext
     {
-        public ProExamDBEntities8()
-            : base("name=ProExamDBEntities8")
+        public ProExamDBEntities9()
+            : base("name=ProExamDBEntities9")
         {
         }
     
@@ -28,6 +28,7 @@ namespace ProExam.Models
         public virtual DbSet<Class> Classes { get; set; }
         public virtual DbSet<Student> Students { get; set; }
         public virtual DbSet<Subject> Subjects { get; set; }
+        public virtual DbSet<Subjects_Student> Subjects_Student { get; set; }
         public virtual DbSet<Subjects_Teacher> Subjects_Teacher { get; set; }
         public virtual DbSet<Teacher> Teachers { get; set; }
         public virtual DbSet<TestSchedule> TestSchedules { get; set; }

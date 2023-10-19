@@ -18,7 +18,7 @@ namespace ProExam.Models
         public string TeacherCode { get; set; }
         public string Subject_ID { get; set; }
     
-        public virtual Subject Subject { get; set; }
-        public virtual Teacher Teacher { get; set; }
+        public virtual Subject Subject1 { get; set; }
+        public virtual Teacher Teacher1 { get; set; }
     }
 }

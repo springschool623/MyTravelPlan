@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="ProExamDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="ProExamDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Class">
           <Key>
             <PropertyRef Name="Class_ID" />
@@ -36,6 +36,14 @@
           <Property Name="QuestionQuantity" Type="int" />
           <Property Name="Testing_Time" Type="int" />
           <Property Name="Subject_Description" Type="text" />
+        </EntityType>
+        <EntityType Name="Subjects_Student">
+          <Key>
+            <PropertyRef Name="Subs_Stu_No" />
+          </Key>
+          <Property Name="Subs_Stu_No" Type="int" Nullable="false" />
+          <Property Name="StudentCode" Type="char" MaxLength="10" />
+          <Property Name="Subject_ID" Type="char" MaxLength="8" />
         </EntityType>
         <EntityType Name="Subjects_Teacher">
           <Key>
@@ -106,6 +114,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_SubjectID_2">
+          <End Role="Subjects" Type="Self.Subjects" Multiplicity="0..1" />
+          <End Role="Subjects_Student" Type="Self.Subjects_Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subjects">
+              <PropertyRef Name="Subject_ID" />
+            </Principal>
+            <Dependent Role="Subjects_Student">
+              <PropertyRef Name="Subject_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SubStudentrCode">
+          <End Role="Student" Type="Self.Student" Multiplicity="0..1" />
+          <End Role="Subjects_Student" Type="Self.Subjects_Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="StudentCode" />
+            </Principal>
+            <Dependent Role="Subjects_Student">
+              <PropertyRef Name="StudentCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_SubTeacherCode">
           <End Role="Teacher" Type="Self.Teacher" Multiplicity="0..1" />
           <End Role="Subjects_Teacher" Type="Self.Subjects_Teacher" Multiplicity="*" />
@@ -122,6 +154,7 @@
           <EntitySet Name="Class" EntityType="Self.Class" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Subjects" EntityType="Self.Subjects" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Subjects_Student" EntityType="Self.Subjects_Student" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Subjects_Teacher" EntityType="Self.Subjects_Teacher" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Teacher" EntityType="Self.Teacher" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TestSchedule" EntityType="Self.TestSchedule" Schema="dbo" store:Type="Tables" />
@@ -137,13 +170,20 @@
             <End Role="Subjects" EntitySet="Subjects" />
             <End Role="Subjects_Teacher" EntitySet="Subjects_Teacher" />
           </AssociationSet>
+          <AssociationSet Name="FK_SubjectID_2" Association="Self.FK_SubjectID_2">
+            <End Role="Subjects" EntitySet="Subjects" />
+            <End Role="Subjects_Student" EntitySet="Subjects_Student" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SubStudentrCode" Association="Self.FK_SubStudentrCode">
+            <End Role="Student" EntitySet="Student" />
+            <End Role="Subjects_Student" EntitySet="Subjects_Student" />
+          </AssociationSet>
           <AssociationSet Name="FK_SubTeacherCode" Association="Self.FK_SubTeacherCode">
             <End Role="Teacher" EntitySet="Teacher" />
             <End Role="Subjects_Teacher" EntitySet="Subjects_Teacher" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ProExamDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -170,6 +210,7 @@
           <Property Name="Stu_Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Class_ID" Type="String" MaxLength="6" FixedLength="true" Unicode="false" />
           <NavigationProperty Name="Class" Relationship="Self.FK_ClassID" FromRole="Student" ToRole="Class" />
+          <NavigationProperty Name="Subjects_Student" Relationship="Self.FK_SubStudentrCode" FromRole="Student" ToRole="Subjects_Student" />
         </EntityType>
         <EntityType Name="Subject">
           <Key>
@@ -181,7 +222,18 @@
           <Property Name="Testing_Time" Type="Int32" />
           <Property Name="Subject_Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="TestSchedules" Relationship="Self.fk_MaMonHoc" FromRole="Subjects" ToRole="TestSchedule" />
-          <NavigationProperty Name="Subjects_Teacher" Relationship="Self.FK_SubjectID" FromRole="Subjects" ToRole="Subjects_Teacher" />
+          <NavigationProperty Name="Subjects_Student" Relationship="Self.FK_SubjectID_2" FromRole="Subjects" ToRole="Subjects_Student" />
+          <NavigationProperty Name="Subjects_Teacher1" Relationship="ProExamDBModel.FK_SubjectID1" FromRole="Subject" ToRole="Subjects_Teacher" />
+        </EntityType>
+        <EntityType Name="Subjects_Student">
+          <Key>
+            <PropertyRef Name="Subs_Stu_No" />
+          </Key>
+          <Property Name="Subs_Stu_No" Type="Int32" Nullable="false" />
+          <Property Name="StudentCode" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="Subject_ID" Type="String" MaxLength="8" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="Student" Relationship="Self.FK_SubStudentrCode" FromRole="Subjects_Student" ToRole="Student" />
+          <NavigationProperty Name="Subject" Relationship="Self.FK_SubjectID_2" FromRole="Subjects_Student" ToRole="Subjects" />
         </EntityType>
         <EntityType Name="Subjects_Teacher">
           <Key>
@@ -190,8 +242,8 @@
           <Property Name="Subs_Tea_No" Type="Int32" Nullable="false" />
           <Property Name="TeacherCode" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
           <Property Name="Subject_ID" Type="String" MaxLength="8" FixedLength="true" Unicode="false" />
-          <NavigationProperty Name="Subject" Relationship="Self.FK_SubjectID" FromRole="Subjects_Teacher" ToRole="Subjects" />
-          <NavigationProperty Name="Teacher" Relationship="Self.FK_SubTeacherCode" FromRole="Subjects_Teacher" ToRole="Teacher" />
+          <NavigationProperty Name="Subject1" Relationship="ProExamDBModel.FK_SubjectID1" FromRole="Subjects_Teacher" ToRole="Subject" />
+          <NavigationProperty Name="Teacher1" Relationship="ProExamDBModel.FK_SubTeacherCode1" FromRole="Subjects_Teacher" ToRole="Teacher" />
         </EntityType>
         <EntityType Name="Teacher">
           <Key>
@@ -206,7 +258,7 @@
           <Property Name="Tea_PhoneNumber" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
           <Property Name="Tea_Address" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="Tea_Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Subjects_Teacher" Relationship="Self.FK_SubTeacherCode" FromRole="Teacher" ToRole="Subjects_Teacher" />
+          <NavigationProperty Name="Subjects_Teacher1" Relationship="ProExamDBModel.FK_SubTeacherCode1" FromRole="Teacher" ToRole="Subjects_Teacher" />
         </EntityType>
         <EntityType Name="TestSchedule">
           <Key>
@@ -232,6 +284,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_SubStudentrCode">
+          <End Role="Student" Type="Self.Student" Multiplicity="0..1" />
+          <End Role="Subjects_Student" Type="Self.Subjects_Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="StudentCode" />
+            </Principal>
+            <Dependent Role="Subjects_Student">
+              <PropertyRef Name="StudentCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="fk_MaMonHoc">
           <End Role="Subjects" Type="Self.Subject" Multiplicity="0..1" />
           <End Role="TestSchedule" Type="Self.TestSchedule" Multiplicity="*" />
@@ -244,11 +308,56 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_SubjectID">
+        <Association Name="FK_SubjectID_2">
           <End Role="Subjects" Type="Self.Subject" Multiplicity="0..1" />
-          <End Role="Subjects_Teacher" Type="Self.Subjects_Teacher" Multiplicity="*" />
+          <End Role="Subjects_Student" Type="Self.Subjects_Student" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Subjects">
+              <PropertyRef Name="Subject_ID" />
+            </Principal>
+            <Dependent Role="Subjects_Student">
+              <PropertyRef Name="Subject_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ProExamDBEntities9" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Classes" EntityType="Self.Class" />
+          <EntitySet Name="Students" EntityType="Self.Student" />
+          <EntitySet Name="Subjects" EntityType="Self.Subject" />
+          <EntitySet Name="Subjects_Student" EntityType="Self.Subjects_Student" />
+          <EntitySet Name="Subjects_Teacher" EntityType="Self.Subjects_Teacher" />
+          <EntitySet Name="Teachers" EntityType="Self.Teacher" />
+          <EntitySet Name="TestSchedules" EntityType="Self.TestSchedule" />
+          <AssociationSet Name="FK_ClassID" Association="Self.FK_ClassID">
+            <End Role="Class" EntitySet="Classes" />
+            <End Role="Student" EntitySet="Students" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SubStudentrCode" Association="Self.FK_SubStudentrCode">
+            <End Role="Student" EntitySet="Students" />
+            <End Role="Subjects_Student" EntitySet="Subjects_Student" />
+          </AssociationSet>
+          <AssociationSet Name="fk_MaMonHoc" Association="Self.fk_MaMonHoc">
+            <End Role="Subjects" EntitySet="Subjects" />
+            <End Role="TestSchedule" EntitySet="TestSchedules" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SubjectID_2" Association="Self.FK_SubjectID_2">
+            <End Role="Subjects" EntitySet="Subjects" />
+            <End Role="Subjects_Student" EntitySet="Subjects_Student" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SubjectID1" Association="ProExamDBModel.FK_SubjectID1">
+            <End Role="Subject" EntitySet="Subjects" />
+            <End Role="Subjects_Teacher" EntitySet="Subjects_Teacher" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SubTeacherCode1" Association="ProExamDBModel.FK_SubTeacherCode1">
+            <End Role="Teacher" EntitySet="Teachers" />
+            <End Role="Subjects_Teacher" EntitySet="Subjects_Teacher" />
+          </AssociationSet>
+        </EntityContainer>
+        <Association Name="FK_SubjectID1">
+          <End Type="ProExamDBModel.Subject" Role="Subject" Multiplicity="0..1" />
+          <End Type="ProExamDBModel.Subjects_Teacher" Role="Subjects_Teacher" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subject">
               <PropertyRef Name="Subject_ID" />
             </Principal>
             <Dependent Role="Subjects_Teacher">
@@ -256,9 +365,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_SubTeacherCode">
-          <End Role="Teacher" Type="Self.Teacher" Multiplicity="0..1" />
-          <End Role="Subjects_Teacher" Type="Self.Subjects_Teacher" Multiplicity="*" />
+        <Association Name="FK_SubTeacherCode1">
+          <End Type="ProExamDBModel.Teacher" Role="Teacher" Multiplicity="0..1" />
+          <End Type="ProExamDBModel.Subjects_Teacher" Role="Subjects_Teacher" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Teacher">
               <PropertyRef Name="TeacherCode" />
@@ -268,36 +377,12 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="ProExamDBEntities8" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Classes" EntityType="Self.Class" />
-          <EntitySet Name="Students" EntityType="Self.Student" />
-          <EntitySet Name="Subjects" EntityType="Self.Subject" />
-          <EntitySet Name="Subjects_Teacher" EntityType="Self.Subjects_Teacher" />
-          <EntitySet Name="Teachers" EntityType="Self.Teacher" />
-          <EntitySet Name="TestSchedules" EntityType="Self.TestSchedule" />
-          <AssociationSet Name="FK_ClassID" Association="Self.FK_ClassID">
-            <End Role="Class" EntitySet="Classes" />
-            <End Role="Student" EntitySet="Students" />
-          </AssociationSet>
-          <AssociationSet Name="fk_MaMonHoc" Association="Self.fk_MaMonHoc">
-            <End Role="Subjects" EntitySet="Subjects" />
-            <End Role="TestSchedule" EntitySet="TestSchedules" />
-          </AssociationSet>
-          <AssociationSet Name="FK_SubjectID" Association="Self.FK_SubjectID">
-            <End Role="Subjects" EntitySet="Subjects" />
-            <End Role="Subjects_Teacher" EntitySet="Subjects_Teacher" />
-          </AssociationSet>
-          <AssociationSet Name="FK_SubTeacherCode" Association="Self.FK_SubTeacherCode">
-            <End Role="Teacher" EntitySet="Teachers" />
-            <End Role="Subjects_Teacher" EntitySet="Subjects_Teacher" />
-          </AssociationSet>
-        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="ProExamDBModelStoreContainer" CdmEntityContainer="ProExamDBEntities8">
+        <EntityContainerMapping StorageEntityContainer="ProExamDBModelStoreContainer" CdmEntityContainer="ProExamDBEntities9">
           <EntitySetMapping Name="Classes">
             <EntityTypeMapping TypeName="ProExamDBModel.Class">
               <MappingFragment StoreEntitySet="Class">
@@ -330,6 +415,15 @@
                 <ScalarProperty Name="QuestionQuantity" ColumnName="QuestionQuantity" />
                 <ScalarProperty Name="Testing_Time" ColumnName="Testing_Time" />
                 <ScalarProperty Name="Subject_Description" ColumnName="Subject_Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Subjects_Student">
+            <EntityTypeMapping TypeName="ProExamDBModel.Subjects_Student">
+              <MappingFragment StoreEntitySet="Subjects_Student">
+                <ScalarProperty Name="Subs_Stu_No" ColumnName="Subs_Stu_No" />
+                <ScalarProperty Name="StudentCode" ColumnName="StudentCode" />
+                <ScalarProperty Name="Subject_ID" ColumnName="Subject_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

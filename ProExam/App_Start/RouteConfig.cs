@@ -18,6 +18,12 @@ namespace ProExam
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
+
+            routes.MapRoute(
+            name: "UserRoute",
+            url: "{controller}/{action}/{usercode}",
+            defaults: new { controller = "Home", action = "Index", usercode = UrlParameter.Optional }
+        );
         }
     }
 }

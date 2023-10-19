@@ -17,7 +17,7 @@ namespace ProExam.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Teacher()
         {
-            this.Subjects_Teacher = new HashSet<Subjects_Teacher>();
+            this.Subjects_Teacher1 = new HashSet<Subjects_Teacher>();
         }
     
         public string TeacherCode { get; set; }
@@ -31,6 +31,6 @@ namespace ProExam.Models
         public string Tea_Password { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Subjects_Teacher> Subjects_Teacher { get; set; }
+        public virtual ICollection<Subjects_Teacher> Subjects_Teacher1 { get; set; }
     }
 }

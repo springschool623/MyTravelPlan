@@ -241,7 +241,7 @@
                     <div class="info">
                         <a href="#" class="d-block">Admin</a>
                     </div>
-                    <a href="@Url.Action("Logout", "Login")" class="btn btn-logout" style="margin-left:auto">
+                    <a href="@Url.Action("Logout", "Home")" class="btn btn-logout" style="margin-left:auto">
                         <i class="fa-solid fa-right-from-bracket" style="color: white;"></i>
                     </a>
                 </div>
@@ -298,6 +298,15 @@
                         </li>
                         <li class="nav-item">
                             <a href="@Url.Action("Index","Subjects")" class="nav-link">
+                                <i class="nav-icon fas fa-book"></i>
+                                <p>
+                                    Môn thi
+                                    <span class="right badge badge-danger">New</span>
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="@Url.Action("Index","Subjects_Student")" class="nav-link">
                                 <i class="nav-icon fas fa-book"></i>
                                 <p>
                                     Môn thi

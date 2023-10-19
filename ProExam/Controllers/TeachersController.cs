@@ -12,7 +12,7 @@ namespace ProExam.Controllers
 {
     public class TeachersController : Controller
     {
-        private ProExamDBEntities8 db = new ProExamDBEntities8();
+        private ProExamDBEntities9 db = new ProExamDBEntities9();
 
         // GET: Teachers
         public ActionResult Index()

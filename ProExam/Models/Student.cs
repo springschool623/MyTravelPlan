@@ -14,6 +14,12 @@ namespace ProExam.Models
     
     public partial class Student
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Student()
+        {
+            this.Subjects_Student = new HashSet<Subjects_Student>();
+        }
+    
         public string StudentCode { get; set; }
         public string Stu_FirstName { get; set; }
         public string Stu_LastName { get; set; }
@@ -26,5 +32,7 @@ namespace ProExam.Models
         public string Class_ID { get; set; }
     
         public virtual Class Class { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Subjects_Student> Subjects_Student { get; set; }
     }
 }

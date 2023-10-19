@@ -18,7 +18,8 @@ namespace ProExam.Models
         public Subject()
         {
             this.TestSchedules = new HashSet<TestSchedule>();
-            this.Subjects_Teacher = new HashSet<Subjects_Teacher>();
+            this.Subjects_Student = new HashSet<Subjects_Student>();
+            this.Subjects_Teacher1 = new HashSet<Subjects_Teacher>();
         }
     
         public string Subject_ID { get; set; }
@@ -30,6 +31,8 @@ namespace ProExam.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TestSchedule> TestSchedules { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Subjects_Teacher> Subjects_Teacher { get; set; }
+        public virtual ICollection<Subjects_Student> Subjects_Student { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Subjects_Teacher> Subjects_Teacher1 { get; set; }
     }
 }

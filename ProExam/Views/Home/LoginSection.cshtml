@@ -1,25 +1,25 @@
 ﻿@model ProExam.Models.LoginInfo
 
 
-@using (Html.BeginForm("Login", "Login", FormMethod.Post))
+<div class="close-btn"><a onclick="dongPopup()"><i class="fa-solid fa-x"></i></a></div>
+
+@using (Html.BeginForm("Login", "Home", FormMethod.Post))
 {
-    <div class="form-label">
-        <button class="btn-close_popup">
-            <i class="fa-solid fa-xmark"></i>
-        </button>
-        <h1>ĐĂNG NHẬP</h1>
+    <h2>Login</h2>
+    <div class="form-element">
+        <label for="usercode">Usercode</label>
+        @Html.TextBoxFor(model => model.UserCode, new { @placeholder = "Enter usercode", @class = "form-control" })
+
     </div>
-    <div class="input-section">
-        <div class="form-section">
-            <h4>User Code:</h4>
-            @Html.TextBoxFor(model => model.UserCode, new { @class = "form-control" })
-        </div>
-        <div class="form-section">
-            <h4>Password:</h4>
-            @Html.PasswordFor(model => model.Password, new { @class = "form-control" })
-        </div>
-        <div class="form-section">
-            <button type="submit" class="btn-login">Đăng nhập</button>
-        </div>
+    <div class="form-element">
+        <label for="password">Password</label>
+        @Html.PasswordFor(model => model.Password, new { @placeholder = "Enter password", @class = "form-control" })
+    </div>
+
+    <div class="form-element">
+        <button type="submit">Sign in</button>
+    </div>
+    <div class="form-element">
+        <a href="">Forgot password?</a>
     </div>
 }
